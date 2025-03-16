@@ -186,10 +186,10 @@ class _FormPageState extends State<FormPage> {
                                   ),
                                   Checkbox(
                                     checkColor: Colors.white,
-                                    value: isChecked,
+                                    value: isDone,
                                     onChanged: (bool? value) {
                                       setState(() {
-                                        isChecked = value!;
+                                        isDone = value!;
                                       });
                                     },
                                   ),
