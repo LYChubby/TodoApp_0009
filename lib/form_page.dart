@@ -40,6 +40,40 @@ class _FormPageState extends State<FormPage> {
           ),
         ],
       ),
+      body: Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Form(
+              key: key,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      spacing: 20,
+                      children: [
+                        Text(
+                          'Task Date : \n',
+                          selectedDate != null
+                              ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
+                              : 'No date selected',
+                        ),
+                        IconButton(
+                          onPressed: _selectDate,
+                          icon: Icon(Icons.date_range, color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
