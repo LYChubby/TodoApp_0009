@@ -20,9 +20,9 @@ class _FormPageState extends State<FormPage> {
   Future<void> _selectDate() async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime(2021, 7, 25),
-      firstDate: DateTime(2021),
-      lastDate: DateTime(2022),
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2030),
     );
 
     setState(() {
@@ -32,14 +32,6 @@ class _FormPageState extends State<FormPage> {
   }
 
   void addTask() {
-    if (selectedDate == null) {
-      setState(() {
-        dateError =
-            "Please select a date"; // Munculkan pesan error jika tanggal kosong
-      });
-      return;
-    }
-
     setState(() {
       daftarTask.add(taskController.text);
       isCheckedList.add(false);
