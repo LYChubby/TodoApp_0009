@@ -12,6 +12,12 @@ class _FormPageState extends State<FormPage> {
   final key = GlobalKey<FormState>();
   List<String> daftarTask = [];
 
+  void addTask() {
+    setState(() {
+      daftarTask.add(taskController.text);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
