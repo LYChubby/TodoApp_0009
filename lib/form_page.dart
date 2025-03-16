@@ -147,9 +147,17 @@ class _FormPageState extends State<FormPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                daftarTask[index],
-                                style: TextStyle(fontSize: 15),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    daftarTask[index],
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  Text(
+                                    "Deadline : ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ",
+                                  ),
+                                ],
                               ),
                             ],
                           ),
