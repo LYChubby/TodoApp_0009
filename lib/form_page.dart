@@ -157,6 +157,10 @@ class _FormPageState extends State<FormPage> {
                                   Text(
                                     "Deadline : ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ",
                                   ),
+                                  Text(
+                                    "Not Done",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
                                 ],
                               ),
                             ],
