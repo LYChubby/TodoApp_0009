@@ -58,69 +58,66 @@ class _FormPageState extends State<FormPage> {
       body: Container(
         color: Colors.white,
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Form(
-              key: key,
-              child: Column(
+        child: Form(
+          key: key,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                spacing: 20,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    spacing: 20,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Task Date :',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            selectedDate != null
-                                ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
-                                : 'No date selected',
-                          ),
-                        ],
+                      const Text(
+                        'Task Date :',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      IconButton(
-                        onPressed: _selectDate,
-                        icon: Icon(Icons.date_range, color: Colors.black),
+                      Text(
+                        selectedDate != null
+                            ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
+                            : 'No date selected',
                       ),
                     ],
                   ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        TextFormField(
-                          controller: taskController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter a task';
-                            }
-                            return null;
-                          },
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: InputDecoration(
-                            labelText: "Add Task",
-                            hintText: "Input Task",
-                          ),
-                        ),
-                        OutlinedButton(
-                          onPressed: () {
-                            if (key.currentState!.validate()) {
-                              addTask();
-                            }
-                          },
-                          child: Text('Submit'),
-                        ),
-                      ],
-                    ),
+                  IconButton(
+                    onPressed: _selectDate,
+                    icon: Icon(Icons.date_range, color: Colors.black),
                   ),
                 ],
               ),
-            ),
-          ],
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: taskController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a task';
+                        }
+                        return null;
+                      },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: const InputDecoration(
+                        labelText: "Add Task",
+                        hintText: "Input Task",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      if (key.currentState!.validate()) {
+                        addTask();
+                      }
+                    },
+                    child: Text('Submit'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
