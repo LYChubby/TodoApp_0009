@@ -166,7 +166,7 @@ class _FormPageState extends State<FormPage> {
                                         style: TextStyle(fontSize: 15),
                                       ),
                                       Text(
-                                        "Deadline : ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ",
+                                        "Deadline: ${deadlines[index] != null ? '${deadlines[index]!.day}/${deadlines[index]!.month}/${deadlines[index]!.year}' : 'No date selected'}",
                                       ),
                                       Text(
                                         isCheckedList[index]
