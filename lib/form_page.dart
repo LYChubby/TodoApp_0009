@@ -12,6 +12,8 @@ class _FormPageState extends State<FormPage> {
   final key = GlobalKey<FormState>();
   List<String> daftarTask = [];
 
+  bool isChecked = false;
+
   DateTime? selectedDate;
 
   Future<void> _selectDate() async {
@@ -147,19 +149,35 @@ class _FormPageState extends State<FormPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    daftarTask[index],
-                                    style: TextStyle(fontSize: 15),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        daftarTask[index],
+                                        style: TextStyle(fontSize: 15),
+                                      ),
+                                      Text(
+                                        "Deadline : ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ",
+                                      ),
+                                      Text(
+                                        "Not Done",
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    "Deadline : ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ",
-                                  ),
-                                  Text(
-                                    "Not Done",
-                                    style: TextStyle(color: Colors.red),
+                                  Checkbox(
+                                    checkColor: Colors.white,
+                                    value: isChecked,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        isChecked = value!;
+                                      });
+                                    },
                                   ),
                                 ],
                               ),
