@@ -8,6 +8,10 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
+  final TextEditingController taskController = TextEditingController();
+  final key = GlobalKey<FormState>();
+  List<String> daftarTask = [];
+
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
