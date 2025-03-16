@@ -12,6 +12,21 @@ class _FormPageState extends State<FormPage> {
   final key = GlobalKey<FormState>();
   List<String> daftarTask = [];
 
+  DateTime? selectedDate;
+
+  Future<void> _selectDate() async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2021, 7, 25),
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2022),
+    );
+
+    setState(() {
+      selectedDate = pickedDate;
+    });
+  }
+
   void addTask() {
     setState(() {
       daftarTask.add(taskController.text);
@@ -50,23 +65,29 @@ class _FormPageState extends State<FormPage> {
               key: key,
               child: Column(
                 children: [
-                  Expanded(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      spacing: 20,
-                      children: [
-                        Text(
-                          'Task Date : \n',
-                          selectedDate != null
-                              ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
-                              : 'No date selected',
-                        ),
-                        IconButton(
-                          onPressed: _selectDate,
-                          icon: Icon(Icons.date_range, color: Colors.black),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    spacing: 20,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Task Date :',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            selectedDate != null
+                                ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
+                                : 'No date selected',
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        onPressed: _selectDate,
+                        icon: Icon(Icons.date_range, color: Colors.black),
+                      ),
+                    ],
                   ),
                 ],
               ),
