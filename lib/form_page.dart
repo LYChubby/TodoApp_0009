@@ -34,6 +34,8 @@ class _FormPageState extends State<FormPage> {
   void addTask() {
     setState(() {
       daftarTask.add(taskController.text);
+      isCheckedList.add(false);
+      deadlines.add(selectedDate);
     });
   }
 
@@ -167,10 +169,12 @@ class _FormPageState extends State<FormPage> {
                                         "Deadline : ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ",
                                       ),
                                       Text(
-                                        isChecked ? "Done" : "Not Done",
+                                        isCheckedList[index]
+                                            ? "Done"
+                                            : "Not Done",
                                         style: TextStyle(
                                           color:
-                                              isChecked
+                                              isCheckedList[index]
                                                   ? Colors.green
                                                   : Colors.red,
                                         ),
@@ -179,10 +183,10 @@ class _FormPageState extends State<FormPage> {
                                   ),
                                   Checkbox(
                                     checkColor: Colors.white,
-                                    value: isChecked,
+                                    value: isCheckedList[index],
                                     onChanged: (bool? value) {
                                       setState(() {
-                                        isChecked = value!;
+                                        isCheckedList[index] = value!;
                                       });
                                     },
                                   ),
