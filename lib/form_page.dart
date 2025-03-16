@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+class Task {
+  String namaTask;
+  DateTime deadline;
+  bool isDone;
+
+  Task({required this.namaTask, required this.deadline, this.isDone = false});
+}
+
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
 
@@ -13,6 +21,7 @@ class _FormPageState extends State<FormPage> {
   List<String> daftarTask = [];
 
   bool isChecked = false;
+  bool isDone = false;
 
   DateTime? selectedDate;
 
@@ -165,8 +174,13 @@ class _FormPageState extends State<FormPage> {
                                         "Deadline : ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ",
                                       ),
                                       Text(
-                                        "Not Done",
-                                        style: TextStyle(color: Colors.red),
+                                        isDone ? "Done" : "Not Done",
+                                        style: TextStyle(
+                                          color:
+                                              isDone
+                                                  ? Colors.green
+                                                  : Colors.red,
+                                        ),
                                       ),
                                     ],
                                   ),
