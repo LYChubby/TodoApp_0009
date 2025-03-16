@@ -89,6 +89,26 @@ class _FormPageState extends State<FormPage> {
                       ),
                     ],
                   ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        TextFormField(
+                          controller: taskController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a task';
+                            }
+                            return null;
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: InputDecoration(
+                            labelText: "Add Task",
+                            hintText: "Input Task",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
