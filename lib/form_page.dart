@@ -138,10 +138,17 @@ class _FormPageState extends State<FormPage> {
                               key.currentState!.validate() &&
                               selectedDate != null;
 
+                          setState(() {
+                            dateError =
+                                selectedDate == null
+                                    ? "Please select a date"
+                                    : null;
+                          });
+
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Container(
-                                height: 50,
+                                height: 20,
                                 alignment: Alignment.center,
                                 child: Text(
                                   isValid
