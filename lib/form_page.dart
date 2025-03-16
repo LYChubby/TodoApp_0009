@@ -106,6 +106,14 @@ class _FormPageState extends State<FormPage> {
                             hintText: "Input Task",
                           ),
                         ),
+                        OutlinedButton(
+                          onPressed: () {
+                            if (key.currentState!.validate()) {
+                              addTask();
+                            }
+                          },
+                          child: Text('Submit'),
+                        ),
                       ],
                     ),
                   ),
