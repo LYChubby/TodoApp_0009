@@ -58,66 +58,85 @@ class _FormPageState extends State<FormPage> {
       body: Container(
         color: Colors.white,
         padding: EdgeInsets.all(16.0),
-        child: Form(
-          key: key,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                spacing: 20,
+        child: Column(
+          children: [
+            Form(
+              key: key,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    spacing: 20,
                     children: [
-                      const Text(
-                        'Task Date :',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Task Date :',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            selectedDate != null
+                                ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
+                                : 'No date selected',
+                          ),
+                        ],
                       ),
-                      Text(
-                        selectedDate != null
-                            ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
-                            : 'No date selected',
+                      IconButton(
+                        onPressed: _selectDate,
+                        icon: Icon(Icons.date_range, color: Colors.black),
                       ),
                     ],
                   ),
-                  IconButton(
-                    onPressed: _selectDate,
-                    icon: Icon(Icons.date_range, color: Colors.black),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: taskController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a task';
-                        }
-                        return null;
-                      },
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: const InputDecoration(
-                        labelText: "Add Task",
-                        hintText: "Input Task",
-                        border: OutlineInputBorder(),
+                  const SizedBox(height: 10),
+                  Row(
+                    spacing: 15,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: taskController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a task';
+                            }
+                            return null;
+                          },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: const InputDecoration(
+                            labelText: "Add Task",
+                            hintText: "Input Task",
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  OutlinedButton(
-                    onPressed: () {
-                      if (key.currentState!.validate()) {
-                        addTask();
-                      }
-                    },
-                    child: Text('Submit'),
+                      OutlinedButton(
+                        onPressed: () {
+                          if (key.currentState!.validate()) {
+                            addTask();
+                          }
+                        },
+                        child: Text('Submit'),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "List Task",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
