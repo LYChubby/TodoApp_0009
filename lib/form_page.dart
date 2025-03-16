@@ -13,8 +13,7 @@ class _FormPageState extends State<FormPage> {
   List<String> daftarTask = [];
   List<bool> isCheckedList = [];
   List<DateTime?> deadlines = [];
-
-  bool isChecked = false;
+  String? dateError;
 
   DateTime? selectedDate;
 
@@ -28,15 +27,27 @@ class _FormPageState extends State<FormPage> {
 
     setState(() {
       selectedDate = pickedDate;
+      dateError = null;
     });
   }
 
   void addTask() {
+    if (selectedDate == null) {
+      setState(() {
+        dateError =
+            "Please select a date"; // Munculkan pesan error jika tanggal kosong
+      });
+      return;
+    }
+
     setState(() {
       daftarTask.add(taskController.text);
       isCheckedList.add(false);
       deadlines.add(selectedDate);
+      selectedDate = null;
+      dateError = null; // Reset error setelah berhasil tambah task
     });
+    taskController.clear();
   }
 
   @override
@@ -87,6 +98,11 @@ class _FormPageState extends State<FormPage> {
                                 ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
                                 : 'No date selected',
                           ),
+                          if (dateError != null)
+                            Text(
+                              dateError!,
+                              style: TextStyle(color: Colors.red, fontSize: 12),
+                            ),
                         ],
                       ),
                       IconButton(
@@ -118,9 +134,34 @@ class _FormPageState extends State<FormPage> {
                       ),
                       OutlinedButton(
                         onPressed: () {
-                          if (key.currentState!.validate()) {
-                            addTask();
-                          }
+                          final isValid =
+                              key.currentState!.validate() &&
+                              selectedDate != null;
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Container(
+                                height: 50,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  isValid
+                                      ? 'Task successfully added'
+                                      : 'Task failed added',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              duration: const Duration(milliseconds: 2000),
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor:
+                                  isValid ? Colors.green : Colors.red,
+                            ),
+                          );
+
+                          if (isValid) addTask();
                         },
                         child: Text('Submit'),
                       ),
