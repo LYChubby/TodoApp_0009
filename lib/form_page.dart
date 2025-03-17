@@ -104,7 +104,7 @@ class _FormPageState extends State<FormPage> {
                           ),
                           Text(
                             selectedDate != null
-                                ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
+                                ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ${selectedDate!.hour}:${selectedDate!.minute}'
                                 : 'No date selected',
                           ),
                           if (dateError != null)
@@ -223,7 +223,7 @@ class _FormPageState extends State<FormPage> {
                                         style: TextStyle(fontSize: 15),
                                       ),
                                       Text(
-                                        "Deadline: ${deadlines[index] != null ? '${deadlines[index]!.day}/${deadlines[index]!.month}/${deadlines[index]!.year}' : 'No date selected'}",
+                                        "Deadline: ${deadlines[index] != null ? '${deadlines[index]!.day}/${deadlines[index]!.month}/${deadlines[index]!.year} ${selectedDate!.hour}:${selectedDate!.minute}' : 'No date selected'}",
                                       ),
                                       Text(
                                         isCheckedList[index]
