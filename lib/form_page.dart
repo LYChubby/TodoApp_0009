@@ -26,16 +26,26 @@ class _FormPageState extends State<FormPage> {
     );
 
     if (pickedDate != null) {
-      // Memilih waktu
       final TimeOfDay? pickedTime = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.fromDateTime(DateTime.now()),
       );
 
-    setState(() {
-      selectedDate = pickedDate;
-      dateError = null;
-    });
+      if (pickedTime != null) {
+        final DateTime pickedDateTime = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+
+        setState(() {
+          selectedDate = pickedDateTime;
+          dateError = null;
+        });
+      }
+    }
   }
 
   void addTask() {
