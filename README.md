@@ -1,8 +1,6 @@
 # Statefull Form
 # Todo App
 
-## Getting Started
-
 
 ![flutter_01](https://github.com/user-attachments/assets/01575eae-0638-451a-8c56-6d5085861b4f)
 
