@@ -17,6 +17,10 @@ class _FormPageState extends State<FormPage> {
 
   DateTime? selectedDate;
 
+  String formatTime(int hour, int minute) {
+    return '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+  }
+
   Future<void> _selectDate() async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -104,7 +108,7 @@ class _FormPageState extends State<FormPage> {
                           ),
                           Text(
                             selectedDate != null
-                                ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ${selectedDate!.hour}:${selectedDate!.minute}'
+                                ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} ${formatTime(selectedDate!.hour, selectedDate!.minute)}'
                                 : 'No date selected',
                           ),
                           if (dateError != null)
@@ -223,7 +227,7 @@ class _FormPageState extends State<FormPage> {
                                         style: TextStyle(fontSize: 15),
                                       ),
                                       Text(
-                                        "Deadline: ${deadlines[index] != null ? '${deadlines[index]!.day}/${deadlines[index]!.month}/${deadlines[index]!.year} ${selectedDate!.hour}:${selectedDate!.minute}' : 'No date selected'}",
+                                        "Deadline: ${deadlines[index] != null ? '${deadlines[index]!.day}/${deadlines[index]!.month}/${deadlines[index]!.year} ${formatTime(selectedDate!.hour, selectedDate!.minute)}' : 'No date selected'}",
                                       ),
                                       Text(
                                         isCheckedList[index]
